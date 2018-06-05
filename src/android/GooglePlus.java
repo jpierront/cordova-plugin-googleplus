@@ -97,15 +97,33 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
             buildGoogleApiClient(args.optJSONObject(0));
 
             Log.i(TAG, "Trying to do silent login!");
-            trySilentLogin();
+            new AsyncTask<String, String, String>() {
+              @Override
+              protected String doInBackground(String... params) {
+                trySilentLogin();
+                return null;
+              }
+            }.execute();
 
         } else if (ACTION_LOGOUT.equals(action)) {
             Log.i(TAG, "Trying to logout!");
-            signOut();
+            new AsyncTask<String, String, String>() {
+              @Override
+              protected String doInBackground(String... params) {
+                signOut();
+                return null;
+              }
+            }.execute();
 
         } else if (ACTION_DISCONNECT.equals(action)) {
             Log.i(TAG, "Trying to disconnect the user");
-            disconnect();
+            new AsyncTask<String, String, String>() {
+              @Override
+              protected String doInBackground(String... params) {
+                disconnect();
+                return null;
+              }
+            }.execute();
 
         } else if (ACTION_GET_SIGNING_CERTIFICATE_FINGERPRINT.equals(action)) {
             getSigningCertificateFingerprint();
